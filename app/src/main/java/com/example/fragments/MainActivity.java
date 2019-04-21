@@ -10,10 +10,11 @@ import android.widget.Button;
 
 import fragments.FirstFragment;
 import fragments.SecondFragment;
+import fragments.ThirdFragment;
 
 public class MainActivity extends AppCompatActivity {
     Button btnClick;
-    Boolean status = true;
+    int status = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +29,30 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                if(status){
+                if(status == 1){
                     FirstFragment firstFragment = new FirstFragment();
                     fragmentTransaction.replace(R.id.fragmentContainer,firstFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     btnClick.setText("Load Second Fragment");
-                    status = false;
+                    status = 2;
                 }
-                else{
+                else if(status == 2){
                     SecondFragment secondFragment = new SecondFragment();
                     fragmentTransaction.replace(R.id.fragmentContainer,secondFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
+                    btnClick.setText("Load Third Fragment");
+                    status = 3;
+                }
+                else{
+
+                    ThirdFragment thirdFragment = new ThirdFragment();
+                    fragmentTransaction.replace(R.id.fragmentContainer,thirdFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                     btnClick.setText("Load First Fragment");
-                    status = true;
+                    status = 1;
                 }
             }
         });
